@@ -138,28 +138,34 @@ LOGGING = {
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-# ALTER DATABASE prjgb$default CHARACTER SET utf8 COLLATE utf8_general_ci;
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'prjgb$default',
-        'USER': 'prjgb',
-        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
-        'HOST': 'prjgb.mysql.pythonanywhere-services.com',
-        'OPTIONS': {
-            'init_command': "SET NAMES 'utf8mb4';SET sql_mode='STRICT_TRANS_TABLES'",
-            'charset': 'utf8mb4',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# ALTER DATABASE prjgb$default CHARACTER SET utf8 COLLATE utf8_general_ci;
+# git clone https://github.com/DenDuet/prjgb.git
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'prjgb$default',
+#         'USER': 'prjgb',
+#         'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+#         'HOST': 'prjgb.mysql.pythonanywhere-services.com',
+#         'OPTIONS': {
+#             'init_command': "SET NAMES 'utf8mb4';SET sql_mode='STRICT_TRANS_TABLES'",
+#             'charset': 'utf8mb4',
+#         },
+#     }
+# }
+
+#   <!--{% if user.is_authenticated and ones.recipe_name.author == user %} -->
+#   <!--<tr class="clickable" onclick="window.location='/category/edit/{{ ones.id }}/'">-->
+#  <!--{% else %}-->
+#  <!--<tr>-->
+#  <!--{% endif %}        -->
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

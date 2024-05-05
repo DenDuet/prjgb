@@ -14,7 +14,7 @@
     <h5>Категории</h5>
     <ul>
       {% for cat in cats %}
-        <li> 
+        <li>
           <a type="button" class="list-group-item" href="/main_recipe/{{cat.id}}/">{{ cat.category_name }}</a>
         </li>
       {% endfor %}
@@ -23,23 +23,23 @@
 <div class="col-md-9 bordered1">
   <h4 class="h4 col-md-5">{{ cat }}</h4>
 
-<table id="rcpTable" class="table table-bordered table-hover">   
-  <thead>   
+<table id="rcpTable" class="table table-bordered table-hover">
+  <thead>
     <tr>
 
       <th>Наименование</th>
       <th>Описание товара</th>
-      <th>Дата создания</th>          
-      <th>Автор</th>      
-      <th>Картинка</th>      
+      <th>Дата создания</th>
+      <th>Автор</th>
+      <th>Картинка</th>
     </tr>
   </thead>
     {% for ones in recipe %}
-        {% if user.is_authenticated and ones.recipe_name.author == user %} 
+        {% if user.is_authenticated %}
          <tr class="clickable" onclick="window.location='/recipe/edit/{{ ones.recipe_name.id }}/'">
         {% else %}
         <tr>
-        {% endif %}        
+        {% endif %}
         <td>{{ ones.recipe_name.name }}</td>
         <td>{{ ones.recipe_name.description }}</td>
         <td>{{ ones.recipe_name.add_date }}</td>
@@ -53,7 +53,7 @@
     {% endfor %}
       </table>
     </div>
-</div>  
+</div>
 
 
   <script>
