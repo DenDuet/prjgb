@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ task }}
+{% endblock %}
+
+{% block content %}
+  <h1>Форма авторизации</h1>
+  <form method="post" action="#">
+    <label>Введите имя:</label>
+    <input type="text" name="auth_name" placeholder="Введите имя" required />
+    <label>Введите пароль:</label>
+    <input type="email" name="auth_email" placeholder="Введите адрес почты" required />
+    <button class="form" type="submit" name="form_auth_submit">Войти</button>
+  </form>
+{% endblock %}

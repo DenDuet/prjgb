@@ -1,0 +1,97 @@
+{% extends 'recipe/base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <h4 class="h4 col-md-5 ur_edit">Выберите рецепт</h4>
+  <a class="btn btn-secondary btn-md col-md-3 ur_edit" href="/recipe/create/" role="button">Добавить рецепт {{ category }}</a>    
+</div>
+
+<table id="rcpTable" class="table table-striped table-hover">   
+  <thead>   
+    <tr>
+      {% comment %} <th>Категория</th> {% endcomment %}
+      <th>Наименование</th>
+      <th>Описание товара</th>
+      <th>Дата создания</th>          
+      <th>Автор</th>      
+      <th>Картинка</th>      
+    </tr>
+  </thead>
+  {% comment %} <tbody> {% endcomment %}
+    {% for ones in recipe %}
+      {% if user.is_authenticated and ones.author == user %} 
+       <tr class="clickable" onclick="window.location='/recipe/edit/{{ ones.id }}/'">
+      {% else %}
+      <tr>
+      {% endif %}
+        <td>{{ ones.name }}</td>
+        <td>{{ ones.description }}</td>
+        <td>{{ ones.add_date }}</td>
+        <td>{{ ones.author.first_name }}</td>
+
+      <td>
+      <p class="col-12 col-md-6">
+        <img src="{{ ones.image }}" width="200px" alt="{{ ones.image }}" />
+      </p>
+      </td>
+    </tr>
+      {% comment %} 
+      {% load static %}
+
+      <div class="image">
+        <a href="/upload/{{ ones.id }}/">Загрузить изображение</a>
+      </div>
+      <div class="delete">
+        <a href="/recipe/delete/{{ ones.id }}/">Удалить товар</a>
+      </div> {% endcomment %}
+
+      {% comment %} <br />
+      <br /> {% endcomment %}
+    {% endfor %}
+    {% comment %} </tbody> {% endcomment %}
+    </table>
+  {% comment %} </div> {% endcomment %}
+{% comment %} </div>   {% endcomment %}
+  {% comment %} <form action="/recipe/create/" method="post">
+    {% csrf_token %}
+    <h2>Добавить рецепт в базу</h2>
+    <div class="input">
+      <div class="blockinput">
+        <label for="name">Наименование:</label>
+        <input type="text" name="name" placeholder="Наименование" />
+      </div>
+
+      <div class="blockinput">
+        <label for="description">Описание:</label>
+        <input type="text" name="description" placeholder="Описание" />
+      </div>
+      <div class="blockinput">
+        <label for="steps">Шаги приготовления:</label>
+        <input type="text" name="steps" placeholder="Шаги приготовления" />
+      </div>
+      <div class="blockinput">
+        <label for="ingredients">Ингредиенты:</label>
+        <input type="text" name="ingredients" placeholder="Ингредиенты" />
+      </div>
+    </div>
+    <div>
+      <input class="in_submit" type="submit" value="Добавить рецепт" />
+    </div>
+  </form>
+  <br /> <br /> <br />
+  <br /> {% endcomment %}
+
+  <script>
+    let table = new DataTable('#rcpTable', {
+      paging: false,
+      scrollCollapse: true,
+      scrollY: '70vh'
+    })
+  </script>
+
+{% endblock %}

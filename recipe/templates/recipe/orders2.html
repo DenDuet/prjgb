@@ -1,0 +1,33 @@
+{% extends 'dz3/base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  <p>Это блок печати заказа пользователя: {{ user.username }}</p>
+  <p>Заказов {{ period }}: {{ orders.count }}</p>
+
+  <div class="row">
+    <table>
+      <tr>
+        <th>ID заказа:</th>
+        <th>Дата заказа:</th>
+        <th>Стоимость заказа:</th>
+        <th>Наименование товара:</th>
+      </tr>
+      {% for order in orders %}
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.date_ordered }}</td>
+          <td>{{ order.total_price }}</td>
+          {% for good in order.goods.all %}
+            <td>{{ good.goods_name }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <br /><br /><br /><br /><br />
+{% endblock %}

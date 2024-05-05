@@ -1,0 +1,74 @@
+{% extends 'dz3/base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  <p class="col-12 col-md-6">
+    <h2>Вывести заказы пользователя</h2>
+    <form action="/orders/show/" method="post">
+      {% csrf_token %}
+      <div class="input">
+        <div class="blockinput">
+          <label for="username">Имя пользователя:</label>
+          <input type="text" name="username" list="character" placeholder="Выберите имя пользователя" />
+          <datalist id="character">
+            {% for user in users %}
+              <option value="{{ user.username }}"></option>
+            {% endfor %}
+          </datalist>
+        </div>
+        <div class="blockinput">
+          <label for="choice">Выберите фильтр:</label>
+          <input type="text" name="choice" list="choice" placeholder="Выберите вариант" />
+          <datalist id="choice">
+            {% for var in vars %}
+              <option value="{{ var }}"></option>
+            {% endfor %}
+          </datalist>
+        </div>
+      </div>
+      <div>
+        <input class="in_submit" type="submit" value="Выбрать заказы" />
+      </div>
+    </form>
+  </p>
+  <br /><br /><br />
+  <p class="col-12 col-md-6">
+    <h2>Создать новый заказ</h2>
+    <form action="/orders/create/" method="post">
+      {% csrf_token %}
+      <div class="input">
+        <div class="blockinput">
+          <label for="username">Имя пользователя:</label>
+          <input type="text" name="username" list="character" placeholder="Выберите имя пользователя" />
+          <datalist id="character">
+            {% for user in users %}
+              <option value="{{ user.username }}"></option>
+            {% endfor %}
+          </datalist>
+        </div>
+
+        <div class="blockinput">
+          <label for="goods_name">Наименование товара:</label>
+          <input type="text" name="goods_name" list="goods" placeholder="Выберите товар" />
+          <datalist id="goods">
+            {% for good in goods %}
+              <option value="{{ good.goods_name }}"></option>
+            {% endfor %}
+          </datalist>
+        </div>
+
+        <div class="blockinput">
+          <label for="total_price">Стоимость заказа:</label>
+          <input type="text" name="total_price" placeholder="Стоимость заказа" />
+        </div>
+      </div>
+      <div>
+        <input class="in_submit" type="submit" value="Добавить заказ" />
+      </div>
+    </form>
+  </p>
+  <br /><br /><br /><br /><br />
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'recipe/base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <h4 class="h4 col-md-5">{{ title }}</h4>
+    <a class="btn btn-secondary btn-md col-md-3 ur_edit" href="/category/create/" role="button">Добавить категорию</a>
+  </div>
+
+  <table id="catTable" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Наименование</th>
+        <th>Описание товара</th>
+      </tr>
+    </thead>
+    {% comment %} <tbody>
+      {% endcomment %}
+      {% for ones in category %}
+      {% if user.is_authenticated and ones.recipe_name.author == user %} 
+      <tr class="clickable" onclick="window.location='/category/edit/{{ ones.id }}/'">
+     {% else %}
+     <tr>
+     {% endif %}        
+
+          <td>{{ ones.category_name }}</td>
+          <td>{{ ones.description }}</td>
+        </tr>
+      {% endfor %}
+      {% comment %}
+    </tbody> {% endcomment %}
+  </table>
+
+  <script>
+    let table = new DataTable('#catTable', {
+      paging: false,
+      scrollCollapse: true,
+      scrollY: '70vh'
+    })
+  </script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ super() }} - {{ title }}
+{% endblock %}
+
+{% block content %}
+  <form action="/goods/update/{{ goods.id }}" method="post">
+    <div class="input">
+      <div class="blockinput">
+        <input type="text" name="goods_name" placeholder={{ goods.goods_name }} />
+      </div>
+
+      <div class="blockinput">
+        <input type="text" name="description" placeholder={{ goods.description }} />
+      </div>
+
+      <div class="blockinput">
+        <input type="floatformat" name="price" placeholder={{ goods.price }} />
+      </div>
+    </div>
+    <div>
+      <input class="in_submit" type="submit" value="Сохранить изменения" />
+    </div>
+  </form>
+{% endblock %}

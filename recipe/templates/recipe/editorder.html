@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ super() }} - {{ title }}
+{% endblock %}
+
+{% block content %}
+  <form action="/orders/update/{{ orders.id }}" method="post">
+    <div class="input">
+      <div class="blockinput">
+        <input type="make_list" name="username" list="character" placeholder={{ orders.users.username }} />
+        <datalist id="character">
+          {% for user in users %}
+            <option value="{{ user.username }}"></option>
+          {% endfor %}
+          </datalist>   
+      </div>
+      <div class="blockinput">
+        <input type="make_list" name="goods_name" list="goods" placeholder={{ orders.goods.goods_name }} />
+        <datalist id="goods">
+          {% for good in goods %}
+            <option value="{{ good.goods_name }}"></option>
+          {% endfor %}
+        </datalist>         
+      </div>
+
+      <div class="blockinput">
+        <input type="text" name="order_date" placeholder={{ orders.order_date }} />
+      </div>
+
+      <div class="blockinput">
+        <input type="text" name="order_status" placeholder={{ orders.order_status }} />
+      </div>
+    </div>
+    <div>
+      <input class="in_submit" type="submit" value="Сохранить изменения" />
+    </div>
+  </form>
+{% endblock %}
